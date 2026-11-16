@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Dofus Companion</title>
+<link rel="icon" href="favicon.ico">
+<style>
+  :root {
+    --bg: #111923; --side: #0F1620; --card: #1B2634; --line: #273648; --raised: #29394B;
+    --fg: #F0F4FA; --muted: #B8C6D7; --faint: #8A9BB0; --accent: #8AB9F5; --accent-h: #A6CBFA;
+    --good: #8BD8BA; --bad: #F3A1A5; --amber: #F2C77B; --input: #131C27;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: radial-gradient(1200px 600px at 20% -10%, #1e3354 0%, var(--bg) 55%) fixed, var(--bg);
+         color: var(--fg); font: 15px/1.55 "Segoe UI", system-ui, -apple-system, sans-serif; }
+  main { max-width: 880px; margin: 0 auto; padding: 48px 16px 64px; }
+  header { display: flex; align-items: center; gap: 18px; margin-bottom: 28px; }
+  header img { width: 72px; height: 72px; }
+  h1 { margin: 0; font-size: 30px; letter-spacing: -0.01em; }
+  .tag { color: var(--muted); margin: 2px 0 0; }
+  .grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 18px; }
+  @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } header { flex-direction: column; text-align: center; } }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 20px 22px; }
+  h2 { font-size: 16px; margin: 0 0 12px; }
+  ul.feat { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+  ul.feat li { display: grid; grid-template-columns: 26px 1fr; gap: 8px; color: var(--muted); }
+  ul.feat b { color: var(--fg); font-weight: 600; }
+  .ico { width: 26px; height: 26px; border-radius: 7px; background: var(--raised); display: grid; place-items: center; font-size: 14px; }
+  label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+  input { width: 100%; padding: 11px 12px; border-radius: 8px; border: 1px solid var(--line); background: var(--input);
+          color: var(--fg); font: 15px "Segoe UI", system-ui, sans-serif; letter-spacing: .04em; }
+  input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+  button { width: 100%; margin-top: 12px; padding: 12px; border: 0; border-radius: 8px; background: var(--accent);
+           color: #111923; font: 600 15px "Segoe UI", system-ui, sans-serif; cursor: pointer; }
+  button:hover { background: var(--accent-h); }
+  .meta { color: var(--faint); font-size: 13px; margin-top: 10px; min-height: 1.4em; }
+  .err { display: none; color: var(--bad); font-size: 13px; margin-top: 10px; }
+  .ok { display: none; color: var(--good); font-size: 13px; margin-top: 10px; }
+  ol.steps { margin: 0; padding-left: 20px; color: var(--muted); }
+  ol.steps li { margin: 8px 0; }
+  ol.steps b { color: var(--fg); }
+  .note { border-left: 3px solid var(--amber); background: #221f18; border-radius: 6px; padding: 10px 12px; color: var(--muted); font-size: 13px; margin-top: 14px; }
+  a { color: var(--accent); }
+  footer { color: var(--faint); font-size: 12px; margin-top: 28px; text-align: center; }
+  .stack { display: grid; gap: 18px; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <img src="logo.png" alt="">
+    <div>
+      <h1>Dofus Companion</h1>
+      <p class="tag">O teu ajudante de mercado para Dofus Unity: preços, flips, receitas e o valor de cada luta.</p>
+    </div>
+  </header>
+
+  <div class="grid">
+    <section class="card">
+      <h2>O que faz</h2>
+      <ul class="feat">
+        <li><span class="ico">◈</span><span><b>Mercado</b> — guarda os preços que lês no HDV e diz o que vale a pena comprar para revender.</span></li>
+        <li><span class="ico">⇄</span><span><b>Pop-up de flips</b> — ao abrires um item no mercado, mostra logo se compensa e por quanto vender.</span></li>
+        <li><span class="ico">▤</span><span><b>Receitas</b> — compara o custo dos ingredientes com o preço de venda e diz se compensa craftar.</span></li>
+        <li><span class="ico">⚔</span><span><b>Lutas</b> — quanto vale cada drop, por luta, sessão e zona.</span></li>
+        <li><span class="ico">⛨</span><span><b>Equipamento</b> — a que preço pôr à venda os teus itens, comparado com os do mercado.</span></li>
+        <li><span class="ico">⟳</span><span><b>Preços partilhados</b> entre amigos e atualizações automáticas.</span></li>
+      </ul>
+      <p class="note">A app só <b>lê</b> o tráfego entre o jogo e o servidor. Nunca envia nada ao jogo nem automatiza nada.</p>
+    </section>
+
+    <div class="stack">
+      <section class="card">
+        <h2>Descarregar</h2>
+        <form method="post" action="https://tfnlkgfvnjjpjilbnpmx.supabase.co/functions/v1/download" id="dl">
+          <label for="code">Código de acesso (pede-o ao Diogo)</label>
+          <input id="code" name="code" autocomplete="off" autocapitalize="off" spellcheck="false" required placeholder="xxxx-xxxx-xxxx">
+          <button type="submit">Descarregar o instalador</button>
+          <p class="err" id="err">Código errado. Confirma e tenta outra vez.</p>
+          <p class="ok" id="ok">A preparar o download… (cerca de 64 MB)</p>
+          <p class="meta" id="meta"></p>
+        </form>
+      </section>
+      <section class="card">
+        <h2>Instalar</h2>
+        <ol class="steps">
+          <li>Abre o <b>DofusCompanionSetup</b>. Se o Windows disser "O Windows protegeu o seu PC", carrega em <b>Mais informações → Executar mesmo assim</b>.</li>
+          <li>Se faltar o <b>Npcap</b>, o instalador abre a página dele: instala-o com as opções que vêm marcadas.</li>
+          <li>Abre a app <b>antes</b> de entrar no jogo. Daí em diante atualiza-se sozinha.</li>
+        </ol>
+      </section>
+    </div>
+  </div>
+  <footer>Dofus Companion · feito por PureGreatness · não é afiliado à Ankama</footer>
+</main>
+<script>
+  if (new URLSearchParams(location.search).get("erro")) document.getElementById("err").style.display = "block";
+  document.getElementById("dl").addEventListener("submit", () => {
+    document.getElementById("err").style.display = "none";
+    document.getElementById("ok").style.display = "block";
+    history.replaceState(null, "", location.pathname);
+  });
+  fetch("https://tfnlkgfvnjjpjilbnpmx.supabase.co/functions/v1/download").then(r => r.ok ? r.json() : null).then(j => {
+    if (!j) return;
+    const mb = (j.size / 1048576).toFixed(1).replace(".", ",");
+    const d = j.date ? new Date(j.date).toLocaleDateString("pt-PT") : "";
+    document.getElementById("meta").textContent = `Versão ${j.version} · ${mb} MB${d ? " · " + d : ""}`;
+  }).catch(() => {});
+</script>
+</body>
+</html>
